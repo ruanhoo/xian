@@ -7,6 +7,8 @@
       en: "Xi'an", zh: '西安', tagEn: 'Walled city · Terracotta Army · hand-pulled noodles', tagZh: '古城墙 · 兵马俑 · 面食小吃' },
     { id: 'vancouver', emoji: '🍁', url: 'https://ruanhoo.github.io/vancouver/living/', color: '#3a8fc7',
       en: 'Vancouver', zh: '温哥华', tagEn: 'Mountains + sea · Sea-to-Sky · Rocky Mountaineer', tagZh: '山与海 · 海天公路 · 落基山登山者号' },
+    { id: 'maldives', emoji: '🏝️', url: 'https://ruanhoo.github.io/maldives/island/', color: '#2ec4a6',
+      en: 'Maldives', zh: '马尔代夫', tagEn: 'Atolls · overwater villas · manta rays & whale sharks', tagZh: '环礁 · 水上屋 · 蝠鲼与鲸鲨' },
   ];
   const T = {
     en: { btn: 'Teleport', title: '🌀 Teleport', sub: 'Pick a city. Hold on to your hat!', here: 'You are here', go: 'Teleport ➜', close: 'Close', welcome: 'Welcome to {to}! Teleported in from {from}.', portal: 'Teleport' },
