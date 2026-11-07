@@ -810,6 +810,16 @@
   statics.push({ y: 41, f: () => drawDecoGate(WALL.x1, 0, true) });
   statics.push({ y: 41, f: () => drawDecoGate(WALL.x0, 0, true) });
 
+  // teleport portal, just inside the South Gate
+  const PORTAL = (() => {
+    let best = [-140, 250]; let bd = -1;
+    for (let x = -360; x <= 360; x += 20) for (let y = 120; y <= 320; y += 20) {
+      const d = Math.min(...buildings.map((b) => Math.hypot(b.x - x, (b.y - y) * 1.3)), ...houses.map((h) => Math.hypot(h.x - x, (h.y - y) * 1.3) + 30), ...trees.map((t) => Math.hypot(t.x - x, (t.y - y) * 1.3) + 40));
+      if (d > bd) { bd = d; best = [x, y]; }
+    }
+    return { x: best[0], y: best[1] };
+  })();
+  if (window.TELE) statics.push({ y: PORTAL.y, f: () => window.TELE.draw(g, sx(PORTAL.x), sy(PORTAL.y), cam.z, time, env.n) });
   buildings.forEach((b) => statics.push({ y: b.y + 6, f: () => drawBuilding(b) }));
   trees.forEach((t) => statics.push({ y: t.y, f: () => drawTree(t) }));
   lamps.forEach((l) => statics.push({ y: l.y, f: () => drawLamp(l) }));
@@ -918,6 +928,10 @@
         pill(text, X, Y, { size, bg: mix(d.c, '#ffffff', 0.72) }); taken.push(pillRect(text, X, Y, size));
       });
       if (cam.z > 0.3) { const X = sx(TRIP_SIGN[0]); const Y = sy(TRIP_SIGN[1]); if (onScreen(X, Y, 140)) pill(tx('tripSign'), X, Y, { size: 12, bg: '#ffe9f1' }); }
+    }
+    if (labelsOn && window.TELE && cam.z > 0.2 && cam.z < 1.6) {
+      const X = sx(PORTAL.x); const Y = sy(PORTAL.y, 92 + 14 / cam.z); const text = '🌀 ' + window.TELE.portalLabel();
+      if (onScreen(X, Y, 80)) { const r = pillRect(text, X, Y, 12); if (free(r)) { pill(text, X, Y, { size: 12, bg: '#e9e3ff' }); taken.push(r); } }
     }
     // place names: landmarks first, then food; overlapping tags are skipped
     const list = [...buildings].sort((a, b) => (selId === b.id) - (selId === a.id) || (hoverB === b) - (hoverB === a) || (b.p.type === 'sight') - (a.p.type === 'sight') || a.y - b.y);
@@ -1052,11 +1066,14 @@
     }
     return best;
   }
+  const hitPortal = (x, y) => !!window.TELE && window.TELE.hit(x, y, sx(PORTAL.x), sy(PORTAL.y), cam.z);
   function hover(x, y) {
+    if (hitPortal(x, y)) { hoverB = null; cv.style.cursor = 'pointer'; return; }
     const p = hitPerson(x, y); const b = p ? null : hitBuilding(x, y);
     hoverB = b; cv.style.cursor = p || b ? 'pointer' : '';
   }
   function clickAt(x, y) {
+    if (hitPortal(x, y)) { window.TELE.open(); return; }
     const p = hitPerson(x, y);
     if (p) { startFollow(p); return; }
     const b = hitBuilding(x, y);
@@ -1307,6 +1324,7 @@
     $('bHelp').setAttribute('aria-label', tx('help'));
     if (!$('decreeTx').textContent || $('decreeTx').dataset.first) { $('decreeTx').textContent = tx('decreeFirst'); $('decreeTx').dataset.first = '1'; }
     syncPause();
+    if (window.TELE) window.TELE.refresh();
   }
   function setLang(next) {
     if (!LANGS.includes(next) || next === lang) return;
@@ -1323,6 +1341,8 @@
   if (reduceMotion) { paused = true; setBtn('bPause', true); }
   applyStatic(); buildTod(); buildChips(); buildList(); buildPlanSelects(); buildPlanList();
   decree.first = true;
+  if (window.TELE) window.TELE.init({ here: 'xian', getLang: () => lang });
+  { const pq = new URLSearchParams(location.search).get('portal'); if (pq) { Object.assign(cam, { x: PORTAL.x, y: PORTAL.y - 20, z: 1.1, tx: PORTAL.x, ty: PORTAL.y - 20, tz: 1.1 }); if (pq === 'open') window.TELE.open(); } }
   addLog(esc(tx('decreeFirst')), 'own', true);
   let introSeen = false; try { introSeen = !!localStorage.getItem(INTRO_KEY); } catch (e) { /* ignore */ }
   if (!introSeen && !new URLSearchParams(location.search).has('nointro')) openIntro(0);
