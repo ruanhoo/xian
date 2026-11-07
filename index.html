@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hello Xi'an! A cartoon guide to sights &amp; food</title>
+  <meta name="description" content="A cartoon-style travel guide to Xi'an, China: explore the Terracotta Army, ancient city wall, pagodas and street food on an interactive map.">
+  <meta name="theme-color" content="#ffc93c">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%AF%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/leaflet.css">
+  <link rel="stylesheet" href="vendor/MarkerCluster.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#explore" data-i18n="skip">Skip to the map</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" data-i18n-aria="brandAria" aria-label="Hello Xi'an home">
+      <span class="brand__icon" aria-hidden="true">🏯</span>
+      <span class="brand__text" data-i18n="brand">Hello Xi'an!</span>
+    </a>
+    <div class="header__right">
+      <nav class="nav" aria-label="Main">
+        <a href="#explore" data-i18n="navMap">Map</a>
+        <a href="#tips" data-i18n="navTips">Tips</a>
+        <a href="island/index.html" data-i18n="navIsland">Island version</a>
+      </nav>
+      <div class="lang" role="group" data-i18n-aria="langAria" aria-label="Language">
+        <button type="button" data-lang="en" lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="zh" lang="zh" aria-pressed="false">中文</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__copy">
+        <p class="sticker" data-i18n="sticker">西安 · Xi'an, China</p>
+        <h1 data-i18n-html="heroTitleHtml">Welcome to <span class="hl">Xi'an!</span></h1>
+        <p class="hero__lead" data-i18n="heroLead">Meet emperors’ clay armies, climb a 600-year-old wall and slurp noodles as wide as belts. Your cartoon guide to the starting point of the Silk Road.</p>
+        <a class="btn" href="#explore" data-i18n="openMap">🗺️ Open the map</a>
+      </div>
+
+      <div class="hero__art" aria-hidden="true">
+        <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <g stroke="#2d2a32" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="0" y="0" width="600" height="420" fill="#bfe8fb" stroke="none"/>
+
+            <!-- sun -->
+            <g class="sun">
+              <circle cx="500" cy="92" r="64" fill="none" stroke="#ffc93c" stroke-width="10" stroke-dasharray="4 20"/>
+              <circle cx="500" cy="92" r="42" fill="#ffd95a"/>
+              <circle cx="487" cy="86" r="4.5" fill="#2d2a32" stroke="none"/>
+              <circle cx="513" cy="86" r="4.5" fill="#2d2a32" stroke="none"/>
+              <path d="M486 102 Q500 116 514 102" fill="none"/>
+              <circle cx="477" cy="100" r="6" fill="#ff9ebb" stroke="none" opacity=".8"/>
+              <circle cx="523" cy="100" r="6" fill="#ff9ebb" stroke="none" opacity=".8"/>
+            </g>
+
+            <!-- clouds -->
+            <g class="cloud cloud--a" fill="#fff">
+              <path d="M70 120 q-30 0 -30 -22 q0 -22 28 -22 q6 -22 36 -20 q26 2 28 24 q26 2 24 22 q-2 18 -26 18 z"/>
+            </g>
+            <g class="cloud cloud--b" fill="#fff">
+              <path d="M300 70 q-24 0 -24 -17 q0 -17 22 -17 q5 -17 28 -15 q21 2 22 19 q20 2 19 17 q-2 13 -20 13 z"/>
+            </g>
+
+            <!-- far hills -->
+            <path d="M0 300 Q70 210 150 270 Q220 200 300 280 Q380 220 460 280 Q530 230 600 290 V420 H0 Z" fill="#7fd1ae"/>
+            <!-- near hills -->
+            <path d="M0 330 Q100 270 200 330 Q300 280 400 335 Q500 290 600 335 V420 H0 Z" fill="#3fb68b"/>
+
+            <!-- pagoda -->
+            <g class="pagoda">
+              <rect x="222" y="300" width="156" height="18" rx="4" fill="#d9c9a3"/>
+              <rect x="240" y="286" width="120" height="14" rx="3" fill="#e8dbb8"/>
+              <!-- tiers: body + roof, bottom to top -->
+              <rect x="255" y="262" width="90" height="26" fill="#fff0c9"/>
+              <rect x="289" y="270" width="22" height="18" rx="11" fill="#e8503a"/>
+              <path d="M236 262 L364 262 L348 242 L252 242 Z" fill="#e8503a"/>
+
+              <rect x="262" y="218" width="76" height="24" fill="#fff0c9"/>
+              <rect x="292" y="224" width="16" height="18" rx="8" fill="#e8503a"/>
+              <path d="M246 218 L354 218 L340 198 L260 198 Z" fill="#e8503a"/>
+
+              <rect x="269" y="176" width="62" height="22" fill="#fff0c9"/>
+              <rect x="294" y="181" width="12" height="17" rx="6" fill="#e8503a"/>
+              <path d="M255 176 L345 176 L332 157 L268 157 Z" fill="#e8503a"/>
+
+              <rect x="276" y="136" width="48" height="21" fill="#fff0c9"/>
+              <rect x="295" y="141" width="10" height="16" rx="5" fill="#e8503a"/>
+              <path d="M264 136 L336 136 L325 118 L275 118 Z" fill="#e8503a"/>
+
+              <rect x="283" y="98" width="34" height="20" fill="#fff0c9"/>
+              <path d="M274 98 L326 98 L317 82 L283 82 Z" fill="#e8503a"/>
+              <path d="M300 82 V58"/>
+              <circle cx="300" cy="52" r="7" fill="#ffc93c"/>
+            </g>
+
+            <!-- city wall -->
+            <rect x="-10" y="344" width="620" height="90" fill="#e7b983"/>
+            <line x1="-4" y1="338" x2="610" y2="338" stroke-width="22" stroke-dasharray="26 14"/>
+            <line x1="-4" y1="338" x2="610" y2="338" stroke="#e7b983" stroke-width="14" stroke-dasharray="26 14" stroke-dashoffset="0"/>
+            <path d="M-10 346 H610" fill="none"/>
+            <path d="M40 346 V420 M120 346 V420 M200 346 V420 M280 346 V420 M360 346 V420 M440 346 V420 M520 346 V420" stroke-width="2.5" opacity=".35"/>
+            <path d="M255 420 V380 Q300 346 345 380 V420 Z" fill="#8a5a3c"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- FACT STRIP -->
+    <section class="facts" data-i18n-aria="factsAria" aria-label="Quick facts">
+      <ul>
+        <li><span aria-hidden="true">📜</span><span data-i18n-html="fact1Html"><strong>13 dynasties</strong> ruled from the area</span></li>
+        <li><span aria-hidden="true">🐪</span><span data-i18n-html="fact2Html"><strong>Silk Road</strong> starting point</span></li>
+        <li><span aria-hidden="true">🧱</span><span data-i18n-html="fact3Html"><strong>~13.7 km</strong> of Ming city wall</span></li>
+        <li><span aria-hidden="true">🍜</span><span data-i18n-html="fact4Html"><strong>Noodles</strong> wider than belts</span></li>
+      </ul>
+    </section>
+
+    <!-- MAP -->
+    <section class="explore-section" id="explore" aria-labelledby="explore-title">
+      <div class="section-head">
+        <h2 id="explore-title" data-i18n="exploreTitle">Pick a spot on the map!</h2>
+        <div class="chips" role="group" data-i18n-aria="filterAria" aria-label="Show on map">
+          <button class="chip is-active" type="button" data-filter="all" aria-pressed="true" data-i18n="filterAll">🗺️ All</button>
+          <button class="chip" type="button" data-filter="sight" aria-pressed="false" data-i18n="filterSight">🏯 Sights</button>
+          <button class="chip" type="button" data-filter="food" aria-pressed="false" data-i18n="filterFood">🍜 Food</button>
+        </div>
+      </div>
+
+      <div class="explore">
+        <div class="map-wrap">
+          <div id="map" role="application" data-i18n-aria="mapAria" aria-label="Interactive map of Xi'an sights and food"></div>
+          <button id="fit" class="map-btn" type="button" data-i18n="resetView">🔭 Reset view</button>
+          <noscript><p class="noscript" data-i18n="noscript">The map needs JavaScript. Try enabling it!</p></noscript>
+        </div>
+        <ul id="list" class="list" data-i18n-aria="listAria" aria-label="Places"></ul>
+      </div>
+      <p class="note" data-i18n="note">Food pins mark neighbourhoods that are great for a dish, not endorsements of one shop. Opening hours and prices change, so check before you go.</p>
+    </section>
+
+    <!-- TIPS -->
+    <section class="tips" id="tips" aria-labelledby="tips-title">
+      <h2 id="tips-title" data-i18n="tipsTitle">Little tips for big adventures</h2>
+      <div class="tips__grid">
+        <article class="tip tip--yellow">
+          <span class="tip__icon" aria-hidden="true">🌸</span>
+          <h3 data-i18n="tip1Title">When to go</h3>
+          <p data-i18n="tip1">Spring and autumn are mild and sunny. Summer is hot, winter is chilly but quiet.</p>
+        </article>
+        <article class="tip tip--sky">
+          <span class="tip__icon" aria-hidden="true">🚇</span>
+          <h3 data-i18n="tip2Title">Getting around</h3>
+          <p data-i18n="tip2">The metro is fast and cheap inside the city. Use taxi or ride-hailing for day trips to the Terracotta Army.</p>
+        </article>
+        <article class="tip tip--pink">
+          <span class="tip__icon" aria-hidden="true">🎟️</span>
+          <h3 data-i18n="tip3Title">Tickets</h3>
+          <p data-i18n="tip3">Major museums and sites often need online reservations. Keep your passport handy.</p>
+        </article>
+        <article class="tip tip--jade">
+          <span class="tip__icon" aria-hidden="true">📱</span>
+          <h3 data-i18n="tip4Title">Paying</h3>
+          <p data-i18n="tip4">Alipay and WeChat Pay run almost everywhere. Link a foreign card before you arrive and carry a little cash.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n-html="footerHtml">Made with 🧡 for curious travellers. Map data © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors.</p>
+  </footer>
+
+  <script src="vendor/leaflet.js"></script>
+  <script src="vendor/leaflet.markercluster.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

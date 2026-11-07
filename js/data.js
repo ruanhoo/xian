@@ -1,0 +1,163 @@
+// Places shown on the map.
+// Sight coordinates were checked against OpenStreetMap (Nominatim).
+// Food pins mark a good *area* to try a dish, not an endorsed restaurant.
+// `far: true` = outside the city core (excluded from the default map view).
+window.XIAN_PLACES = [
+  // ---------- SIGHTS ----------
+  {
+    id: 'terracotta', type: 'sight', emoji: '🗿', far: true,
+    name: 'Terracotta Army', zh: '秦始皇兵马俑',
+    lat: 34.3874, lng: 109.2777,
+    blurb: 'Thousands of life-size clay soldiers guard the tomb of Emperor Qin Shi Huang. Look closely: every face is different!',
+    tip: 'About an hour east of the center. Go early, book ahead, and allow half a day.',
+  },
+  {
+    id: 'huaqing', type: 'sight', emoji: '♨️', far: true,
+    name: 'Huaqing Palace', zh: '华清宫',
+    lat: 34.3649, lng: 109.2075,
+    blurb: 'A hot-spring palace at the foot of Mt. Li, linked to Tang Emperor Xuanzong and his beloved Yang Guifei.',
+    tip: 'Pair it with the Terracotta Army for one big day trip.',
+  },
+  {
+    id: 'citywall', type: 'sight', emoji: '🧱',
+    name: 'Ancient City Wall', zh: '西安城墙 · 永宁门',
+    lat: 34.2531, lng: 108.9423,
+    blurb: 'One of the best-preserved city walls in China, built in the Ming dynasty. Walk or cycle the whole ~13.7 km loop on top!',
+    tip: 'Rent a bike at the South Gate. Sunset and lantern-lit evenings are magical.',
+  },
+  {
+    id: 'belltower', type: 'sight', emoji: '🔔',
+    name: 'Bell Tower', zh: '钟楼',
+    lat: 34.2610, lng: 108.9423,
+    blurb: 'A Ming-dynasty tower sitting in the middle of a roundabout at the very heart of the old city.',
+    tip: 'Buy a combo ticket with the Drum Tower. Lovely lit up at night.',
+  },
+  {
+    id: 'drumtower', type: 'sight', emoji: '🥁',
+    name: 'Drum Tower', zh: '鼓楼',
+    lat: 34.2618, lng: 108.9388,
+    blurb: 'The Bell Tower’s twin. Bells once greeted the morning and drums announced the evening.',
+    tip: 'Steps from the Muslim Quarter. Try to catch a drum performance.',
+  },
+  {
+    id: 'muslimquarter', type: 'sight', emoji: '🏮',
+    name: 'Muslim Quarter', zh: '回民街',
+    lat: 34.2634, lng: 108.9389,
+    blurb: 'A buzzing maze of lanes packed with snacks, sizzling grills, lanterns and souvenir stalls.',
+    tip: 'Come hungry and come at dusk. Cash-free pay apps work almost everywhere.',
+  },
+  {
+    id: 'mosque', type: 'sight', emoji: '🕌',
+    name: 'Great Mosque', zh: '清真大寺',
+    lat: 34.2634, lng: 108.9365,
+    blurb: 'A calm, leafy maze of courtyards that blends Chinese architecture with Islamic tradition. Its roots go back to the Tang dynasty.',
+    tip: 'Dress modestly and be quiet. The prayer hall is for worshippers.',
+  },
+  {
+    id: 'smallgoose', type: 'sight', emoji: '🦢',
+    name: 'Small Wild Goose Pagoda', zh: '小雁塔',
+    lat: 34.2408, lng: 108.9373,
+    blurb: 'A slender Tang pagoda in a quiet temple garden. Smaller than its big sister, but just as graceful.',
+    tip: 'Great for a peaceful break from the crowds.',
+  },
+  {
+    id: 'beilin', type: 'sight', emoji: '📜',
+    name: 'Beilin Museum', zh: '碑林博物馆',
+    lat: 34.2550, lng: 108.9481,
+    blurb: 'The “Forest of Steles”: thousands of carved stone tablets, a treasure trove of Chinese calligraphy.',
+    tip: 'Try a stone rubbing on nearby Shuyuanmen street.',
+  },
+  {
+    id: 'museum', type: 'sight', emoji: '🏺',
+    name: 'Shaanxi History Museum', zh: '陕西历史博物馆',
+    lat: 34.2259, lng: 108.9503,
+    blurb: 'Tang-style halls full of treasures from 13 dynasties that called this region home.',
+    tip: 'Reserve entry online in advance and bring your passport.',
+  },
+  {
+    id: 'biggoose', type: 'sight', emoji: '🏯',
+    name: 'Giant Wild Goose Pagoda', zh: '大雁塔',
+    lat: 34.2198, lng: 108.9594,
+    blurb: 'A Tang-dynasty pagoda built to keep Buddhist scriptures brought back from India by the monk Xuanzang.',
+    tip: 'Watch the musical fountain show in the square out front.',
+  },
+  {
+    id: 'everbright', type: 'sight', emoji: '✨',
+    name: 'Datang Everbright City', zh: '大唐不夜城',
+    lat: 34.2155, lng: 108.9600,
+    blurb: 'A Tang-themed pedestrian street that lights up after dark with giant lanterns, statues and street shows.',
+    tip: 'Visit after sunset. It’s right beside the Giant Wild Goose Pagoda.',
+  },
+  {
+    id: 'tangparadise', type: 'sight', emoji: '🌸',
+    name: 'Tang Paradise', zh: '大唐芙蓉园',
+    lat: 34.2149, lng: 108.9693,
+    blurb: 'A Tang-style garden park of lakes, pavilions and costumed performers, glowing with lanterns at night.',
+    tip: 'Plan 3–4 hours and stay for the evening show.',
+  },
+  {
+    id: 'daming', type: 'sight', emoji: '🪁',
+    name: 'Daming Palace Ruins', zh: '大明宫',
+    lat: 34.2939, lng: 108.9585,
+    blurb: 'The vast ruins of the Tang emperors’ palace, now a giant park where kids fly kites.',
+    tip: 'Wide open and flat, so it’s great for cycling.',
+  },
+
+  // ---------- FOOD ----------
+  {
+    id: 'roujiamo', type: 'food', emoji: '🥙',
+    name: 'Roujiamo', zh: '肉夹馍',
+    lat: 34.2622, lng: 108.9391,
+    blurb: 'The “Chinese hamburger”: tender stewed pork chopped into a crispy, fluffy flatbread.',
+    tip: 'Find it all over the Muslim Quarter. Look for the stall with the longest queue.',
+  },
+  {
+    id: 'skewers', type: 'food', emoji: '🍢',
+    name: 'Lamb Skewers', zh: '烤羊肉串',
+    lat: 34.2628, lng: 108.9380,
+    blurb: 'Cumin-dusted, charcoal-grilled lamb on a stick. The smell alone will guide you.',
+    tip: 'Best eaten hot, standing in the street.',
+  },
+  {
+    id: 'baozi', type: 'food', emoji: '🥟',
+    name: 'Soup Dumplings', zh: '灌汤包',
+    lat: 34.2639, lng: 108.9391,
+    blurb: 'Big steamed buns filled with juicy broth. Nibble a hole, sip the soup, then eat the rest.',
+    tip: 'Jia San Baozi on Beiyuanmen is a famous place to try them.',
+  },
+  {
+    id: 'persimmon', type: 'food', emoji: '🍪',
+    name: 'Persimmon Cakes', zh: '柿子饼',
+    lat: 34.2612, lng: 108.9391,
+    blurb: 'Sweet, gooey fried pastry stuffed with persimmon and sprinkled with sesame seeds.',
+    tip: 'Eat them hot. Careful, the filling is lava!',
+  },
+  {
+    id: 'zengao', type: 'food', emoji: '🍚',
+    name: 'Zengao Rice Cake', zh: '甑糕',
+    lat: 34.2630, lng: 108.9372,
+    blurb: 'Steamed sticky rice layered with red dates, a sweet and chewy local breakfast.',
+    tip: 'Best in the morning near the Great Mosque.',
+  },
+  {
+    id: 'paomo', type: 'food', emoji: '🍲',
+    name: 'Yangrou Paomo', zh: '羊肉泡馍',
+    lat: 34.2150, lng: 108.9600,
+    blurb: 'Tear a flatbread into tiny pieces, then a chef ladles rich lamb soup over it. Eating it is half the fun.',
+    tip: 'Tongshengxiang is a well-known name. This branch is in Datang Everbright City.',
+  },
+  {
+    id: 'biangbiang', type: 'food', emoji: '🍜',
+    name: 'Biangbiang Noodles', zh: 'biángbiáng 面',
+    lat: 34.2545, lng: 108.9448,
+    blurb: 'Belt-wide, hand-pulled noodles smothered in chili oil, garlic and vinegar. The name sounds like the dough slapping the counter.',
+    tip: 'Plenty of noodle shops around Shuyuanmen street.',
+  },
+  {
+    id: 'liangpi', type: 'food', emoji: '🥢',
+    name: 'Liangpi Cold Noodles', zh: '凉皮',
+    lat: 34.2553, lng: 108.9393,
+    blurb: 'Silky, chewy cold noodles tossed with vinegar, chili and cucumber. A refreshing summer snack.',
+    tip: 'Found at stalls all over town. Good ones are near Defu Xiang.',
+  },
+];
