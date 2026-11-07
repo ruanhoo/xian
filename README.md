@@ -9,13 +9,13 @@ No build step. From this folder:
 
 then open http://localhost:8765
 
-## Island version (`island/`)
-A second, canvas-drawn "living island" take on the same data: open http://localhost:8765/island/ (linked from the main nav; the island page links back to the classic map).
-- Five hex islands (Ancient City, Muslim Quarter, Tang Town, Daming Palace, Day-Trip Isle) joined by bridges; landmarks are big buildings, food places are small shops.
-- Little people walk between islands, eat, chat and follow an "Emperor" who issues decrees; day/dusk/night/auto cycle with lanterns; labels, follow, pause, bird's-eye, journal.
-- Searchable list with favorites (shared `xian-fav` key), place cards, a route planner (nearest-neighbour order, travel/visit times, route drawn on the islands), a 5-step intro, EN / 中文.
-- Files: `island/index.html`, `island.css`, `island.js` (engine + UI), `strings.js` (all text). It reuses `js/data.js` and `js/i18n.js`. No tiles or API key needed.
-- Debug URL params: `?nointro`, `?lang=zh`, `?tod=0..3`, `?sel=<place id>`, `?panel=drawer|plan|log`, `?route=id,id,...`, `?warm=<seconds>`.
+## Walled-city version (`city/`)
+A second, canvas-drawn "living city" take on the same data: open http://localhost:8765/city/ (linked from the main nav; the city page links back to the classic map).
+- A walled ancient city: wall with four gates and corner towers, a moat, and a street grid. Sights and food sit at their real relative positions (Bell Tower in the centre, Muslim Quarter to its north-west, Tang Town to the south, Daming Palace to the north, Huaqing Palace and the Terracotta Army a day trip to the east). Landmarks are big buildings; food places are small shops.
+- Little people walk the streets and through the gates, eat, chat and follow an "Emperor" who issues decrees; day/dusk/night/auto cycle with lanterns; labels, follow, pause, bird's-eye, journal.
+- Searchable list with favorites (shared `xian-fav` key), place cards, a route planner (nearest-neighbour order, travel/visit times, route drawn along the streets), a 5-step intro, EN / 中文.
+- Files: `city/index.html`, `city.css`, `city.js` (engine + UI), `strings.js` (all text). It reuses `js/data.js` and `js/i18n.js`. No tiles or API key needed.
+- Debug URL params: `?nointro`, `?lang=zh`, `?tod=0..3`, `?sel=<place id>`, `?panel=drawer|plan|log`, `?route=id,id,...`, `?warm=<seconds>`, `?cam=x,y,zoom`, `?view=world`.
 
 ## Structure
 - `index.html`  page layout, inline SVG hero illustration

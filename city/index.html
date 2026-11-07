@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-  <title>Xi'an Island · a living cartoon map of sights &amp; food</title>
-  <meta name="description" content="Wander a tiny cartoon island world of Xi'an: landmarks, street food, and little people eating their way around.">
+  <title>Xi'an City · a living cartoon map of sights &amp; food</title>
+  <meta name="description" content="Wander a tiny cartoon model of ancient Xi'an: the walled city, landmarks and street food in their real places, and little people eating their way around.">
   <meta name="theme-color" content="#58b9d6">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%9D%EF%B8%8F%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%AF%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="island.css">
+  <link rel="stylesheet" href="city.css">
 </head>
 <body>
-  <canvas id="cv" role="img" data-i18n-aria="canvasAria" aria-label="Interactive illustrated island map of Xi'an"></canvas>
+  <canvas id="cv" role="img" data-i18n-aria="canvasAria" aria-label="Interactive illustrated map of the walled city of Xi'an"></canvas>
 
   <div id="logo" class="ui glass">
-    <div class="big">XI'AN<br>ISLAND</div>
-    <div class="sub"><b data-i18n="logoTag">Cartoon isle</b><span data-i18n="logoSub">Sights + Food</span></div>
+    <div class="big">XI'AN<br>CITY</div>
+    <div class="sub"><b data-i18n="logoTag">Walled city</b><span data-i18n="logoSub">Sights + Food</span></div>
   </div>
 
   <div id="tod" class="ui glass" role="group" aria-label="Time of day"></div>
@@ -52,7 +52,7 @@
     <div id="list"></div>
   </aside>
 
-  <aside id="log" class="ui glass"><h5 data-i18n="logTitle">Island journal</h5><div id="logs" aria-live="off"></div></aside>
+  <aside id="log" class="ui glass"><h5 data-i18n="logTitle">City journal</h5><div id="logs" aria-live="off"></div></aside>
 
   <section id="card" class="ui glass" aria-live="polite"></section>
 
@@ -81,6 +81,6 @@
   <script src="../js/data.js"></script>
   <script src="../js/i18n.js"></script>
   <script src="strings.js"></script>
-  <script src="island.js"></script>
+  <script src="city.js"></script>
 </body>
 </html>
