@@ -9,6 +9,8 @@
       en: 'Vancouver', zh: '温哥华', tagEn: 'Mountains + sea · Sea-to-Sky · Rocky Mountaineer', tagZh: '山与海 · 海天公路 · 落基山登山者号' },
     { id: 'maldives', emoji: '🏝️', url: 'https://ruanhoo.github.io/maldives/island/', color: '#2ec4a6',
       en: 'Maldives', zh: '马尔代夫', tagEn: 'Atolls · overwater villas · manta rays & whale sharks', tagZh: '环礁 · 水上屋 · 蝠鲼与鲸鲨' },
+    { id: 'banff', emoji: '🏞️', url: 'https://ruanhoo.github.io/banff-jasper/living/', color: '#f2a93b',
+      en: 'Banff & Jasper', zh: '班夫与贾斯珀', tagEn: 'Turquoise lakes · Icefields Parkway · glaciers & wildlife', tagZh: '碧蓝湖泊 · 冰原大道 · 冰川与野生动物' },
   ];
   const T = {
     en: { btn: 'Teleport', title: '🌀 Teleport', sub: 'Pick a city. Hold on to your hat!', here: 'You are here', go: 'Teleport ➜', close: 'Close', welcome: 'Welcome to {to}! Teleported in from {from}.', portal: 'Teleport' },
