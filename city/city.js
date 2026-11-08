@@ -1087,7 +1087,61 @@
   const planSel = new Set();
   const card = $('card');
 
+  /* ================= tower sounds (synthesised, no audio files) ================= */
+  let actx = null;
+  function audioCtx() {
+    try {
+      if (navigator.userActivation && !navigator.userActivation.hasBeenActive) return null; // never start sound before a click or tap
+      if (!actx) { const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null; actx = new AC(); }
+      if (actx.state === 'suspended') actx.resume();
+      return actx;
+    } catch (e) { return null; }
+  }
+  function noiseBuf(a, dur) {
+    const n = Math.floor(a.sampleRate * dur); const buf = a.createBuffer(1, n, a.sampleRate); const d = buf.getChannelData(0);
+    for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
+    return buf;
+  }
+  // a big bronze bell: inharmonic partials, each decaying at its own rate, plus a short clapper "tock"
+  function playBell() {
+    const a = audioCtx(); if (!a) return;
+    const t0 = a.currentTime + 0.01; const f0 = 196; // roughly G3
+    const out = a.createGain(); out.gain.value = 0.5; out.connect(a.destination);
+    [[0.5, 0.55, 5.5], [1, 1, 4.2], [1.19, 0.45, 3.4], [1.5, 0.3, 2.6], [2, 0.5, 2.2], [2.5, 0.22, 1.6], [3.01, 0.2, 1.3], [4.2, 0.12, 0.9], [5.4, 0.08, 0.6]].forEach(([r, amp, dec]) => {
+      const o = a.createOscillator(); const g = a.createGain();
+      o.type = 'sine'; o.frequency.value = f0 * r * (1 + (Math.random() - 0.5) * 0.004);
+      g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(amp * 0.5, t0 + 0.006); g.gain.exponentialRampToValueAtTime(0.0001, t0 + dec);
+      o.connect(g); g.connect(out); o.start(t0); o.stop(t0 + dec + 0.05);
+    });
+    const n = a.createBufferSource(); n.buffer = noiseBuf(a, 0.08);
+    const nf = a.createBiquadFilter(); nf.type = 'bandpass'; nf.frequency.value = 2400; nf.Q.value = 0.8;
+    const ng = a.createGain(); ng.gain.setValueAtTime(0.35, t0); ng.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.07);
+    n.connect(nf); nf.connect(ng); ng.connect(out); n.start(t0);
+  }
+  // a big war drum: a thump whose pitch drops, plus a skin slap; two beats like a night watch
+  function playDrum() {
+    const a = audioCtx(); if (!a) return;
+    const out = a.createGain(); out.gain.value = 0.9; out.connect(a.destination);
+    [0, 0.34].forEach((off, i) => {
+      const t0 = a.currentTime + 0.01 + off; const amp = i ? 0.8 : 1;
+      const o = a.createOscillator(); const g = a.createGain();
+      o.type = 'sine'; o.frequency.setValueAtTime(150, t0); o.frequency.exponentialRampToValueAtTime(48, t0 + 0.28);
+      g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(amp, t0 + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.7);
+      o.connect(g); g.connect(out); o.start(t0); o.stop(t0 + 0.75);
+      const o2 = a.createOscillator(); const g2 = a.createGain();
+      o2.type = 'triangle'; o2.frequency.setValueAtTime(95, t0); o2.frequency.exponentialRampToValueAtTime(60, t0 + 0.2);
+      g2.gain.setValueAtTime(0.0001, t0); g2.gain.exponentialRampToValueAtTime(amp * 0.35, t0 + 0.01); g2.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.35);
+      o2.connect(g2); g2.connect(out); o2.start(t0); o2.stop(t0 + 0.4);
+      const n = a.createBufferSource(); n.buffer = noiseBuf(a, 0.12);
+      const nf = a.createBiquadFilter(); nf.type = 'lowpass'; nf.frequency.value = 1400;
+      const ng = a.createGain(); ng.gain.setValueAtTime(amp * 0.5, t0); ng.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.1);
+      n.connect(nf); nf.connect(ng); ng.connect(out); n.start(t0);
+    });
+  }
+  const TOWER_SOUND = { belltower: playBell, drumtower: playDrum };
+
   function selectBuilding(b, opts) {
+    if (TOWER_SOUND[b.id]) TOWER_SOUND[b.id]();
     selId = b.id; if (!(opts && opts.noFly)) { flyTo(b.x, b.y - 24, 1.3); }
     if (isMobile()) { closePanel('drawer'); closePanel('plan'); }
     renderCard(); highlightList();
