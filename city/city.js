@@ -1139,9 +1139,20 @@
     });
   }
   const TOWER_SOUND = { belltower: playBell, drumtower: playDrum };
+  // people nearby complain about the noise, one after another
+  function complain(b, kind) {
+    const near = people.map((p) => ({ p, d: Math.hypot(p.x - b.x, (p.y - b.y) * 1.3) })).sort((u, v) => u.d - v.d);
+    let pick_ = near.filter((o) => o.d < 320).slice(0, 4);
+    if (pick_.length < 2) pick_ = near.slice(0, 2);
+    pick_.forEach((o, i) => {
+      const p = o.p; const lines = p.owner ? tx('noiseEmp') : tx(kind);
+      p.replyAt = time + 0.7 + i * 0.8 + Math.random() * 0.5; p.replyTxt = pick(lines);
+      p.wait = Math.max(p.wait, 4); p.cool = Math.max(p.cool, 6); p.moving = false;
+    });
+  }
 
   function selectBuilding(b, opts) {
-    if (TOWER_SOUND[b.id]) TOWER_SOUND[b.id]();
+    if (TOWER_SOUND[b.id] && audioCtx()) { TOWER_SOUND[b.id](); complain(b, b.id === 'belltower' ? 'noiseBell' : 'noiseDrum'); }
     selId = b.id; if (!(opts && opts.noFly)) { flyTo(b.x, b.y - 24, 1.3); }
     if (isMobile()) { closePanel('drawer'); closePanel('plan'); }
     renderCard(); highlightList();
